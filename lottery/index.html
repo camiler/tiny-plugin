@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>转盘</title>
+	<style type="text/css">
+	.lottery-wrap {
+	    margin-bottom: 3rem;
+	    position: relative;}
+	.lottery-content {
+	    background-image: url("http://img14.360buyimg.com/wympay/jfs/t2902/108/1899533914/18160/155bd870/5750f5c5Nfb8df9b1.png");
+	    background-repeat: no-repeat;
+	    background-size: 100%;
+	    width: 10rem;
+	    height: 10rem;
+	    margin: 0 auto;
+	}
+	.take-btn {
+	    background-image: url("http://img12.360buyimg.com/wympay/jfs/t2695/56/1022470668/3338/6fb7325b/573038b7Nd3a4dce8.png");
+	    background-repeat: no-repeat;
+	    background-size: 100%;
+	    width: 2.65rem;
+	    height: 3.25rem;
+	    position: absolute;
+	    left: 50%;
+	    margin-left: -1.35rem;
+	    top: 3.2rem;  }
+	
+	</style>
+</head>
+<body>
+	<div class="lottery-wrap">
+    	<div class="lottery-content" id="J_lotteryWrap"></div>
+    	<div class="take-btn J_start" clstag="jr|keycount|xl_lottery|take_btn"></div>
+  	</div>
+  	 <script type="text/javascript">
+    var docEl = document.documentElement,
+
+        resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+        recalc = function() {
+            //设置根字体大小
+            docEl.style.fontSize = 20 * (docEl.clientWidth / 320) + 'px';
+        };
+
+    //绑定浏览器缩放与加载时间
+    window.addEventListener(resizeEvt, recalc, false);
+    document.addEventListener('DOMContentLoaded', recalc, false);
+    </script>
+    <script type="text/javascript" src="http://static.jdpay.com/basic/dist/js/m-public/zepto.min.js"></script>
+    <script type="text/javascript" src="turn.js"></script>
+    <script type="text/javascript">
+    var lottery = new Lottery({
+            el: $('#J_lotteryWrap'),
+            startBtn: $('.J_start'),
+            num: 6,
+            start: function(){                
+                setTimeout(function(){
+                	this.run(5);
+                }.bind(this), 100);
+            },
+            stop: function(){
+            	alert('转盘结束');
+                this.reset();
+            }
+        });
+
+    </script>
+</body>
+</html>
