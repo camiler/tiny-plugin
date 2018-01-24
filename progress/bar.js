@@ -1,46 +1,33 @@
-;(function(){
-    function Bar(items, datas){
-        this.len = items.length;
-        this.items = items;
-        this.datas = datas;
-        
-        this.init();
-        this.show();
-    }
+class Bar{
+  constructor(items, datas) {
+    this.len = items.length;
+    this.items = items;
+    this.datas = datas;
 
-    Bar.prototype = {
-        init: function($bar){
-            this.outerWidths = [];
-            this.items.forEach(function(item, index){
-                this.outerWidths.push(item.parentNode.offsetWidth);
-            }.bind(this));
-            var max = this.compare();
-            this.coef = Math.ceil(max)+2;
-        },
-        show: function(){
-            var coef = this.coef;
-            this.items.forEach(function(bar, i){
-                bar.style.width = this.num[i]/coef * this.outerWidths[i] +"px";
-                bar.style.webkitTransition = 'width 2s';
-            }.bind(this));
-        },
-        compare: function(){
-            var num = [];
-            for(var i=0;i<this.len;i++){
-                num.push(Number(this.datas[i].replace("%","")));
-            }
-            this.num = num;
-            return Math.max.apply(null,num);
-        }
+    this.init();
+    this.show();
+  }
+  init() {
+    this.outerWidths = [];
+    this.items.forEach((item, index) => {
+      this.outerWidths.push(item.parentNode.offsetWidth);
+    })
+    const max = this.compare();
+    this.coef = Math.ceil(max)+2;
+  }
+  show() {
+    const coef = this.coef;
+    this.items.forEach((bar, i) => {
+      bar.style.width = this.num[i]/coef * this.outerWidths[i] +"px";
+      bar.style.webkitTransition = 'width 2s';
+    });
+  }
+  compare() {
+    const num = [];
+    for(let i = 0; i < this.len; i++){
+      num.push(Number(this.datas[i].replace("%","")));
     }
-    var _globals = (function(){ return this || (0,eval)("this"); }());
-
-    if (typeof module !== "undefined" && module.exports) {
-        module.exports = Bar;
-    } else if (typeof define === "function" && define.amd) {
-        define(function(){return Bar;});
-    } else {
-        _globals.Bar = Bar;
-    }
-
-})();
+    this.num = num;
+    return Math.max.apply(null,num);
+  }
+}
